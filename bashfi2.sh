@@ -168,7 +168,7 @@ case $option in
 					clear
 					read -p "Ammount to scan in secs: " timeout 
 					nohup timeout $timeout xterm -hold -e termdown $timeout > /dev/null 2>&1 &
-					timeout $timeout xterm -hold -e sudo airodump-ng $interFace 
+					timeout $timeout xterm -hold -e sudo airodump-ng $interface 
 					read -p "Enter how many times to send deauth frame: " times
 					read -p "Enter bssid of network: " bssid
 					iwlist $interFace channel | grep Current
